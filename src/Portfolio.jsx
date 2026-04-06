@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-import { Starbackground } from './components/Starbackground';
+import { Scene } from './components/Scene';
 import { Navbar } from './components/Navbar'
 import { Hero } from './components/Hero'
 import { About } from './components/About'
@@ -15,12 +15,12 @@ export const Portfolio = () => {
 
 
   return (
-    <div className='min-h-screen bg-background text-foreground overflow-x-hidden'>
+    <div className='min-h-screen bg-transparent text-foreground overflow-x-hidden relative'>
 
 
-      {/* Background effects */}
+      {/* Background 3D effects */}
 
-      <Starbackground />
+      <Scene />
 
       {/* navbar */}
 
