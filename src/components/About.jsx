@@ -36,7 +36,7 @@ export const About = () => {
             className="lg:col-span-5 relative w-full aspect-[4/5] max-w-md mx-auto"
           >
             <div className="absolute inset-0 bg-primary/30 rounded-3xl blur-[60px] transform -rotate-6"></div>
-            <div className="relative h-full w-full rounded-3xl border-[0.5px] border-white/20 bg-background/40 backdrop-blur-2xl overflow-hidden p-3 shadow-2xl flex items-center justify-center">
+            <div className="relative h-full w-full rounded-3xl border-[0.5px] border-black/10 dark:border-white/20 bg-white/40 dark:bg-background/40 backdrop-blur-2xl overflow-hidden p-3 shadow-2xl flex items-center justify-center">
               <div className="w-full h-full bg-gradient-to-br from-primary/20 to-purple-900/40 rounded-2xl flex flex-col justify-center items-center relative overflow-hidden group">
                 {/* Fallback Icon */}
                 <User className="h-32 w-32 text-primary/30 absolute transition-transform duration-500 group-hover:scale-125 group-hover:text-primary/50" />
@@ -58,7 +58,7 @@ export const About = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="lg:col-span-7 space-y-8 bg-background/20 backdrop-blur-xl p-8 md:p-10 rounded-[2rem] border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]"
+            className="lg:col-span-7 space-y-8 bg-white/40 dark:bg-background/20 backdrop-blur-xl p-8 md:p-10 rounded-[2rem] border border-black/5 dark:border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(0,0,0,0.5)]"
           >
             <motion.h3 variants={itemVariants} className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-400">
               Passionate Web Developer | Tech Creator | Entrepreneur
@@ -84,7 +84,7 @@ export const About = () => {
                 whileTap={{ scale: 0.95 }}
                 href="/Ammarcv.pdf" download="Ammar-Mustafa-CV.pdf"
                 className="px-8 py-3 rounded-full border-2 border-primary text-primary font-semibold text-center transition-colors"
-              >
+               >
                 Download CV
               </motion.a>
             </motion.div>
@@ -100,10 +100,10 @@ export const About = () => {
                  <motion.div 
                    key={index} 
                    whileHover={{ y: -5, backgroundColor: "rgba(139, 92, 246, 0.15)", borderColor: "rgba(139, 92, 246, 0.5)" }}
-                   className="flex items-center gap-3 p-3 rounded-xl border border-white/5 bg-background/50 backdrop-blur-sm transition-all"
+                   className="flex items-center gap-3 p-3 rounded-xl border border-black/5 dark:border-white/5 bg-white/50 dark:bg-background/50 backdrop-blur-sm transition-all"
                  >
                    <div className="p-2 rounded-lg bg-primary/20 text-primary shadow-[0_0_10px_rgba(139,92,246,0.3)]">{skill.icon}</div>
-                   <span className="font-medium text-sm text-gray-200">{skill.title}</span>
+                   <span className="font-medium text-sm text-foreground">{skill.title}</span>
                  </motion.div>
                ))}
             </motion.div>

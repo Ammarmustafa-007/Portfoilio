@@ -1,6 +1,6 @@
 import React from 'react'
 
-
+import { Cursor } from './components/Cursor';
 import { Scene } from './components/Scene';
 import { Navbar } from './components/Navbar'
 import { Hero } from './components/Hero'
@@ -15,9 +15,9 @@ export const Portfolio = () => {
 
 
   return (
-    <div className='min-h-screen bg-transparent text-foreground overflow-x-hidden relative'>
+    <div className='min-h-screen bg-transparent text-foreground overflow-x-hidden relative cursor-none'>
 
-
+      <Cursor />
       {/* Background 3D effects */}
 
       <Scene />

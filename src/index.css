@@ -113,3 +113,9 @@
     animation-delay: 1.2s;
   }
 }
+
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
