@@ -1,73 +1,185 @@
-import { motion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowDown, Sparkles } from "lucide-react";
+import { useRef } from "react";
 
 export const Hero = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
+  const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
+
+  const letterVariants = {
+    hidden: { opacity: 0, y: 50, rotateX: -90 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      transition: {
+        delay: 0.5 + i * 0.05,
+        duration: 0.6,
+        ease: [0.215, 0.61, 0.355, 1],
+      },
+    }),
+  };
+
+  const firstName = "Ammar".split("");
+  const lastName = "Mustafa".split("");
+
   return (
     <section
+      ref={containerRef}
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden"
     >
-      <div className="container max-w-4xl mx-auto text-center z-10 mt-16">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9, y: 30 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="space-y-6 dark:bg-background/20 bg-white/40 backdrop-blur-xl p-8 md:p-12 rounded-[2.5rem] border border-black/5 dark:border-white/10 shadow-[0_0_40px_rgba(139,92,246,0.15)] relative overflow-hidden"
+      <motion.div style={{ opacity, scale, y }} className="container max-w-5xl mx-auto text-center z-10 mt-16">
+        {/* Floating badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 30, scale: 0.8 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md mb-8"
         >
-          {/* Subtle inner glow */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-32 bg-primary/20 blur-[80px]"></div>
+          <Sparkles className="w-4 h-4 text-primary" />
+          <span className="text-sm font-medium text-primary">Available for Work</span>
+        </motion.div>
 
-          <motion.h1 
+        {/* Hero Card */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, y: 40 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="glass-card p-8 md:p-14 relative"
+        >
+          {/* Orb glows */}
+          <div className="absolute -top-20 left-1/4 w-60 h-60 bg-primary/20 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute -bottom-20 right-1/4 w-60 h-60 bg-pink-500/15 rounded-full blur-[100px] pointer-events-none" />
+
+          {/* Greeting */}
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl font-extrabold tracking-tight relative z-10"
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="text-lg md:text-xl text-muted-foreground font-medium mb-4"
           >
-            Hi, I'm <br className="md:hidden" />
-            <span className="text-primary text-glow inline-block px-2">Ammar</span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-gray-800 to-gray-400 dark:from-white dark:to-gray-400 ml-2 inline-block">Mustafa</span>
-          </motion.h1>
-
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 1 }}
-            className="text-base md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-medium relative z-10"
-          >
-            🚀 I build modern, responsive web applications with JavaScript, React, and MERN stack.<br />
-            🎨 Skilled in Tailwind CSS, Next-Level UI, and crafting seamless digital experiences.<br />
-            🌍 Entrepreneurial mindset with a focus on innovation, problem-solving, and growth.
+            Hey there 👋 I'm
           </motion.p>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.6 }}
-            className="pt-8 relative z-10 inline-block"
+          {/* Name with 3D letter animation */}
+          <h1 className="text-5xl sm:text-6xl md:text-8xl font-display font-black tracking-tight mb-2 perspective-[1000px]">
+            <span className="inline-flex overflow-hidden">
+              {firstName.map((letter, i) => (
+                <motion.span
+                  key={`first-${i}`}
+                  custom={i}
+                  variants={letterVariants}
+                  initial="hidden"
+                  animate="visible"
+                  className="gradient-text inline-block"
+                  whileHover={{ scale: 1.2, rotate: [-5, 5, 0], transition: { duration: 0.3 } }}
+                >
+                  {letter}
+                </motion.span>
+              ))}
+            </span>
+            <span className="inline-block mx-3" />
+            <span className="inline-flex overflow-hidden">
+              {lastName.map((letter, i) => (
+                <motion.span
+                  key={`last-${i}`}
+                  custom={i + firstName.length}
+                  variants={letterVariants}
+                  initial="hidden"
+                  animate="visible"
+                  className="text-foreground inline-block"
+                  style={{ opacity: 0.85 }}
+                  whileHover={{ scale: 1.2, color: "hsl(263 70% 62%)", transition: { duration: 0.3 } }}
+                >
+                  {letter}
+                </motion.span>
+              ))}
+            </span>
+          </h1>
+
+          {/* Animated role text */}
+          <motion.div
+            initial={{ opacity: 0, width: 0 }}
+            animate={{ opacity: 1, width: "auto" }}
+            transition={{ delay: 1.5, duration: 1, ease: "easeOut" }}
+            className="overflow-hidden mx-auto mb-8"
           >
-            <motion.a 
-              whileHover={{ scale: 1.05, boxShadow: "0px 0px 25px 5px rgba(139, 92, 246, 0.4)" }}
+            <p className="text-xl md:text-2xl font-display font-light text-muted-foreground whitespace-nowrap">
+              Full-Stack Developer · UI/UX Enthusiast · Entrepreneur
+            </p>
+          </motion.div>
+
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.8, duration: 1 }}
+            className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10"
+          >
+            I craft modern, responsive web applications with <span className="text-primary font-semibold">React</span>,{" "}
+            <span className="text-primary font-semibold">Three.js</span>, and the{" "}
+            <span className="text-primary font-semibold">MERN stack</span> — turning ideas into seamless digital experiences
+            that users love.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2.2, duration: 0.8 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
+            <motion.a
+              href="#projects"
+              whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(139, 92, 246, 0.5)" }}
               whileTap={{ scale: 0.95 }}
-              href="#projects" 
-              className="inline-block px-10 py-4 text-primary-foreground font-bold text-lg rounded-full overflow-hidden relative group"
+              className="cosmic-button text-lg px-10 py-4 flex items-center gap-2"
             >
-              <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-primary to-purple-800 group-hover:from-purple-600 group-hover:to-primary transition-all duration-500"></span>
-              <span className="relative">View My Work</span>
+              <Sparkles className="w-5 h-5" />
+              View My Work
+            </motion.a>
+            <motion.a
+              href="#contact"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(139, 92, 246, 0.1)" }}
+              whileTap={{ scale: 0.95 }}
+              className="px-10 py-4 rounded-full border-2 border-primary/30 text-primary font-semibold text-lg transition-all duration-500 hover:border-primary/60"
+            >
+              Let's Talk
             </motion.a>
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
 
-      <motion.div 
+      {/* Scroll indicator */}
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce z-10"
+        transition={{ delay: 3, duration: 1 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center z-10"
       >
-        <span className="text-sm font-semibold text-muted-foreground mb-2 uppercase tracking-widest">Scroll</span>
-        <a href="#about" className="p-3 rounded-full dark:bg-background/50 bg-white/50 backdrop-blur-md border border-black/10 dark:border-white/10 hover:bg-primary/20 transition-all hover:scale-110">
-          <ArrowDown className="h-6 w-6 text-primary" />
-        </a>
+        <motion.span
+          animate={{ opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-[0.25em]"
+        >
+          Scroll
+        </motion.span>
+        <motion.a
+          href="#about"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="w-10 h-10 rounded-full bg-card/50 backdrop-blur-md border border-white/10 flex items-center justify-center hover:bg-primary/20 transition-all duration-300"
+        >
+          <ArrowDown className="h-5 w-5 text-primary" />
+        </motion.a>
       </motion.div>
     </section>
   );

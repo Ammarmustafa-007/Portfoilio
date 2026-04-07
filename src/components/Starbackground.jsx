@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 
-// id, size, x, y, opacity, animationDuration
-// id, size, x, y, delay, animationDuration
-
 export const Starbackground = () => {
   const [stars, setStars] = useState([]);
   const [meteors, setMeteors] = useState([]);
@@ -11,51 +8,41 @@ export const Starbackground = () => {
     generateStars();
     generateMeteors();
 
-    const handleResize = () => {
-      generateStars();
-    };
-
+    const handleResize = () => generateStars();
     window.addEventListener("resize", handleResize);
-
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const generateStars = () => {
     const numberOfStars = Math.floor(
-      (window.innerWidth * window.innerHeight) / 3500
+      (window.innerWidth * window.innerHeight) / 4000
     );
-
     const newStars = [];
-
     for (let i = 0; i < numberOfStars; i++) {
       newStars.push({
         id: i,
-        size: Math.random() * 3 + 1,
+        size: Math.random() * 2.5 + 0.5,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        opacity: Math.random() * 0.5 + 0.5,
+        opacity: Math.random() * 0.5 + 0.3,
         animationDuration: Math.random() * 4 + 2,
       });
     }
-
     setStars(newStars);
   };
 
   const generateMeteors = () => {
-    const numberOfMeteors = 6;
     const newMeteors = [];
-
-    for (let i = 0; i < numberOfMeteors; i++) {
+    for (let i = 0; i < 8; i++) {
       newMeteors.push({
         id: i,
         size: Math.random() * 2 + 1,
         x: Math.random() * 100,
         y: Math.random() * 20,
-        delay: Math.random() * 50,
-        animationDuration: Math.random() * 5 + 5 ,
+        delay: Math.random() * 30 + "s",
+        animationDuration: Math.random() * 5 + 5,
       });
     }
-
     setMeteors(newMeteors);
   };
 
@@ -63,7 +50,7 @@ export const Starbackground = () => {
     <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
       {stars.map((star) => (
         <div
-          // key={star.id}
+          key={star.id}
           className="star animate-pulse-subtle"
           style={{
             width: star.size + "px",
@@ -81,11 +68,11 @@ export const Starbackground = () => {
           key={meteor.id}
           className="meteor animate-meteor"
           style={{
-            width: meteor.size * 40 + "px",
+            width: meteor.size * 50 + "px",
             height: meteor.size * 1 + "px",
             left: meteor.x + "%",
             top: meteor.y + "%",
-            animationDelay: meteor.delay ,
+            animationDelay: meteor.delay,
             animationDuration: meteor.animationDuration + "s",
           }}
         />

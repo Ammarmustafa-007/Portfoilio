@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Cursor } from './components/Cursor';
 import { Scene } from './components/Scene';
+import { Starbackground } from './components/Starbackground';
 import { Navbar } from './components/Navbar'
 import { Hero } from './components/Hero'
 import { About } from './components/About'
@@ -13,32 +14,34 @@ import { Footer } from './components/Footer';
 
 export const Portfolio = () => {
 
-
   return (
     <div className='min-h-screen bg-transparent text-foreground overflow-x-hidden relative cursor-none'>
 
-      <Cursor />
-      {/* Background 3D effects */}
+      {/* Aurora ambient background */}
+      <div className="aurora-bg" />
 
+      {/* Custom Cursor */}
+      <Cursor />
+
+      {/* Star & Meteor Background */}
+      <Starbackground />
+
+      {/* 3D Scene */}
       <Scene />
 
-      {/* navbar */}
-
+      {/* Navbar */}
       <Navbar />
 
-      {/* mincontent */}
-
+      {/* Sections */}
       <Hero />
 
       <About />
 
       <Skills />
 
-      {/* <Projects/>  */}
+      <Projects />
 
       <Contact />
-
-      {/* footer */}
 
       <Footer />
 
