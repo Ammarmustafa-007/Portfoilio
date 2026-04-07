@@ -15,7 +15,7 @@ export const Starbackground = () => {
 
   const generateStars = () => {
     const numberOfStars = Math.floor(
-      (window.innerWidth * window.innerHeight) / 4000
+      (window.innerWidth * window.innerHeight) / 4500
     );
     const newStars = [];
     for (let i = 0; i < numberOfStars; i++) {
@@ -26,6 +26,7 @@ export const Starbackground = () => {
         y: Math.random() * 100,
         opacity: Math.random() * 0.5 + 0.3,
         animationDuration: Math.random() * 4 + 2,
+        animationDelay: Math.random() * 4,
       });
     }
     setStars(newStars);
@@ -33,14 +34,16 @@ export const Starbackground = () => {
 
   const generateMeteors = () => {
     const newMeteors = [];
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 6; i++) {
       newMeteors.push({
         id: i,
-        size: Math.random() * 2 + 1,
-        x: Math.random() * 100,
-        y: Math.random() * 20,
-        delay: Math.random() * 30 + "s",
-        animationDuration: Math.random() * 5 + 5,
+        size: Math.random() * 1.5 + 0.8,
+        x: Math.random() * 80 + 10,
+        y: Math.random() * 25,
+        // Each meteor gets a large enough delay so they don't all start visible.
+        // The first one starts a few seconds in; subsequent ones are staggered.
+        delay: (i * 4) + Math.random() * 3,
+        animationDuration: Math.random() * 4 + 8,
       });
     }
     setMeteors(newMeteors);
@@ -59,6 +62,7 @@ export const Starbackground = () => {
             top: star.y + "%",
             opacity: star.opacity,
             animationDuration: star.animationDuration + "s",
+            animationDelay: star.animationDelay + "s",
           }}
         />
       ))}
@@ -66,14 +70,19 @@ export const Starbackground = () => {
       {meteors.map((meteor) => (
         <div
           key={meteor.id}
-          className="meteor animate-meteor"
+          className="animate-meteor"
           style={{
-            width: meteor.size * 50 + "px",
-            height: meteor.size * 1 + "px",
+            position: "absolute",
+            width: meteor.size * 45 + "px",
+            height: meteor.size + "px",
             left: meteor.x + "%",
             top: meteor.y + "%",
-            animationDelay: meteor.delay,
+            animationDelay: meteor.delay + "s",
             animationDuration: meteor.animationDuration + "s",
+            background: "linear-gradient(90deg, hsl(var(--star-color)), hsla(var(--star-color), 0.4), transparent)",
+            borderRadius: "9999px",
+            boxShadow: "0 0 6px 2px hsla(var(--star-color), 0.25)",
+            opacity: 0,
           }}
         />
       ))}

@@ -6,16 +6,20 @@
   :root {
     --background: 240 20% 97%;
     --foreground: 240 10% 10%;
-    --card: 0 0% 100%;
-    --primary: 263 70% 58%;
+    --card: 240 10% 96%;
+    --primary: 263 70% 52%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 240 5% 92%;
+    --secondary: 240 5% 90%;
     --secondary-foreground: 240 6% 15%;
-    --muted: 240 5% 92%;
-    --muted-foreground: 240 4% 46%;
-    --accent: 280 65% 60%;
+    --muted: 240 5% 90%;
+    --muted-foreground: 240 4% 40%;
+    --accent: 280 65% 55%;
     --accent-foreground: 0 0% 100%;
-    --border: 240 6% 90%;
+    --border: 240 6% 85%;
+    --glass-border: 240 6% 78%;
+    --glass-bg: 0 0% 100%;
+    --input-bg: 240 10% 94%;
+    --star-color: 263 70% 52%;
   }
 
   .dark {
@@ -31,6 +35,10 @@
     --accent: 280 65% 65%;
     --accent-foreground: 0 0% 100%;
     --border: 260 20% 18%;
+    --glass-border: 0 0% 100%;
+    --glass-bg: 260 25% 8%;
+    --input-bg: 260 20% 10%;
+    --star-color: 0 0% 100%;
   }
 
   * {
@@ -58,21 +66,34 @@
 
   .gradient-text-static {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(280, 80%, 65%), hsl(320, 80%, 55%));
+    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(280, 80%, 60%), hsl(320, 75%, 50%));
   }
 
   /* ─── Glass Card ─── */
   .glass-card {
-    @apply relative rounded-3xl border border-white/10 overflow-hidden;
-    background: linear-gradient(135deg, hsla(var(--card), 0.6), hsla(var(--card), 0.3));
+    @apply relative rounded-3xl overflow-hidden;
+    border: 1px solid hsla(var(--glass-border), 0.12);
+    background: linear-gradient(135deg, hsla(var(--glass-bg), 0.65), hsla(var(--glass-bg), 0.35));
     backdrop-filter: blur(20px) saturate(1.5);
     -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  }
+
+  /* Light-mode: stronger border and more opaque background */
+  :root .glass-card {
+    border-color: hsla(var(--glass-border), 0.25);
+    background: linear-gradient(135deg, hsla(var(--glass-bg), 0.85), hsla(var(--glass-bg), 0.6));
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+  }
+  .dark .glass-card {
+    border-color: hsla(var(--glass-border), 0.1);
+    background: linear-gradient(135deg, hsla(var(--glass-bg), 0.55), hsla(var(--glass-bg), 0.25));
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
   }
 
   .glass-card::before {
     content: '';
     @apply absolute inset-0 rounded-3xl;
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), transparent, rgba(168, 85, 247, 0.05));
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.06), transparent, rgba(168, 85, 247, 0.04));
     pointer-events: none;
   }
 
@@ -135,6 +156,14 @@
     background-size: 200% 200%;
   }
 
+  /* Tone down aurora in light mode so it doesn't wash out text */
+  :root .aurora-bg {
+    opacity: 0.5;
+  }
+  .dark .aurora-bg {
+    opacity: 1;
+  }
+
   /* ─── Section Divider ─── */
   .section-divider {
     @apply w-24 h-1 mx-auto mb-12 rounded-full;
@@ -159,35 +188,42 @@
     box-shadow: 0 20px 60px rgba(139, 92, 246, 0.15), 0 0 30px rgba(139, 92, 246, 0.1);
   }
 
-  /* Stars */
+  /* Stars — color-adaptive */
   .star {
-    @apply absolute rounded-full bg-white;
-    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
+    @apply absolute rounded-full;
+    background: hsl(var(--star-color));
+    box-shadow: 0 0 6px 1px hsla(var(--star-color), 0.4);
   }
 
   /* Meteors */
   .meteor {
-    @apply absolute bg-gradient-to-r from-white via-white to-transparent rounded-full;
-    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-    animation: meteor 15s linear infinite;
+    @apply absolute rounded-full;
+    background: linear-gradient(90deg, hsl(var(--star-color)), hsla(var(--star-color), 0.5), transparent);
+    box-shadow: 0 0 8px 3px hsla(var(--star-color), 0.3);
   }
 
   @keyframes pulse-subtle {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0.1; }
+    50% { opacity: 0.15; }
   }
   .animate-pulse-subtle {
     animation: pulse-subtle 4s ease-in-out infinite;
   }
 
+  /* Meteor animation: starts off-screen and invisible */
   @keyframes meteor {
     0% {
-      transform: rotate(210deg) translateX(0);
+      transform: rotate(215deg) translateX(200px);
+      opacity: 0;
+    }
+    5% {
       opacity: 1;
     }
-    70% { opacity: 1; }
+    70% {
+      opacity: 1;
+    }
     100% {
-      transform: rotate(215deg) translateX(-400px);
+      transform: rotate(215deg) translateX(-500px);
       opacity: 0;
     }
   }
@@ -210,11 +246,18 @@
     background: radial-gradient(circle, rgba(139, 92, 246, 0.3), transparent);
   }
 
-  /* Frosted Glass Input */
+  /* Frosted Glass Input — light/dark adaptive */
   .glass-input {
-    @apply w-full px-5 py-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm
+    @apply w-full px-5 py-4 rounded-xl
            focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50
            transition-all duration-300 text-foreground placeholder:text-muted-foreground;
+    background: hsl(var(--input-bg));
+    border: 1px solid hsl(var(--border));
+  }
+  .dark .glass-input {
+    background: hsla(var(--input-bg), 0.6);
+    border-color: hsla(var(--glass-border), 0.1);
+    backdrop-filter: blur(8px);
   }
   .glass-input:focus {
     box-shadow: 0 0 30px rgba(139, 92, 246, 0.1);

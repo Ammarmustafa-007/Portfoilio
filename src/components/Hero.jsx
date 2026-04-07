@@ -9,9 +9,10 @@ export const Hero = () => {
     offset: ["start start", "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
-  const y = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.85], [1, 0.92]);
+  const y = useTransform(scrollYProgress, [0, 0.85], [0, 80]);
+  const scrollIndicatorOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
 
   const letterVariants = {
     hidden: { opacity: 0, y: 50, rotateX: -90 },
@@ -158,11 +159,12 @@ export const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator — fades as you start scrolling */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 3, duration: 1 }}
+        style={{ opacity: scrollIndicatorOpacity }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center z-10"
       >
         <motion.span

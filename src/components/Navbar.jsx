@@ -72,7 +72,7 @@ export const Navbar = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className={`fixed w-full z-50 transition-all duration-500 ${
           scrolled
-            ? "py-2 bg-background/60 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] border-b border-white/5"
+            ? "py-2 bg-background/80 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.08)] border-b border-border/50"
             : "py-4"
         }`}
       >
@@ -91,7 +91,7 @@ export const Navbar = () => {
           </motion.a>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-1 p-1 rounded-full bg-card/30 backdrop-blur-md border border-white/5">
+          <div className="hidden md:flex items-center gap-1 p-1 rounded-full bg-card/50 dark:bg-card/30 backdrop-blur-md border border-border/30 dark:border-white/5">
             {navitems.map((item) => (
               <motion.a
                 key={item.name}
@@ -128,7 +128,7 @@ export const Navbar = () => {
             {/* Mobile Menu Button */}
             <motion.button
               onClick={() => setMenuopen((prev) => !prev)}
-              className="md:hidden p-2 rounded-xl bg-card/30 backdrop-blur-md border border-white/10 text-foreground"
+              className="md:hidden p-2 rounded-xl bg-card/50 dark:bg-card/30 backdrop-blur-md border border-border/30 dark:border-white/10 text-foreground"
               aria-label={menuopen ? "Close Menu" : "Open Menu"}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
