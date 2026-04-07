@@ -178,7 +178,7 @@ export const Hero = () => {
           href="#about"
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="w-10 h-10 rounded-full bg-card/50 backdrop-blur-md border border-white/10 flex items-center justify-center hover:bg-primary/20 transition-all duration-300"
+          className="w-10 h-10 rounded-full bg-card/80 dark:bg-card/50 backdrop-blur-md border border-border/30 dark:border-white/10 flex items-center justify-center hover:bg-primary/20 transition-all duration-300"
         >
           <ArrowDown className="h-5 w-5 text-primary" />
         </motion.a>

@@ -8,9 +8,9 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="relative py-12 px-6 border-t border-white/5 z-10">
+    <footer className="relative py-12 px-6 border-t border-border/30 z-10">
       {/* Top gradient line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
         {/* Copyright */}

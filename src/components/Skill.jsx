@@ -62,7 +62,7 @@ export const Skills = () => {
               className={`relative px-6 py-2.5 rounded-full text-sm font-semibold capitalize transition-all duration-500 ${
                 activeCategory === category
                   ? "text-white"
-                  : "text-muted-foreground hover:text-foreground bg-card/50 border border-white/5 backdrop-blur-md"
+                  : "text-muted-foreground hover:text-foreground bg-card/60 dark:bg-card/50 border border-border/30 dark:border-white/5 backdrop-blur-md"
               }`}
             >
               {activeCategory === category && (

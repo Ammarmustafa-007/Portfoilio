@@ -177,7 +177,7 @@ export const Contact = () => {
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.boxShadow = "none";
-                      e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+                      e.currentTarget.style.borderColor = "";
                     }}
                   >
                     {social.icon}

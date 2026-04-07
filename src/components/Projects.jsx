@@ -84,7 +84,7 @@ export const Projects = () => {
 
                 {/* Icon */}
                 <motion.div
-                  className="relative z-10 p-5 rounded-2xl bg-background/20 backdrop-blur-md border border-white/10"
+                  className="relative z-10 p-5 rounded-2xl bg-background/30 dark:bg-background/20 backdrop-blur-md border border-border/20 dark:border-white/10"
                   style={{ color: project.accentColor }}
                   whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
                   transition={{ duration: 0.5 }}
@@ -114,7 +114,7 @@ export const Projects = () => {
                     rel="noreferrer noopener"
                     whileHover={{ scale: 1.15 }}
                     whileTap={{ scale: 0.9 }}
-                    className="p-3 rounded-full bg-card text-foreground border border-white/10 shadow-lg"
+                    className="p-3 rounded-full bg-card border border-border/20 dark:border-white/10 shadow-lg"
                   >
                     <Github size={18} />
                   </motion.a>
