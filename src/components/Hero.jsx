@@ -38,20 +38,6 @@ export const Hero = () => {
       className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden"
     >
       <motion.div style={{ opacity, scale, y }} className="container max-w-5xl mx-auto text-center z-10 mt-16">
-        {/* Floating badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 30, scale: 0.8 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-primary/20 border border-primary/40 shadow-[0_0_20px_rgba(139,92,246,0.25)] backdrop-blur-md mb-8 mt-8"
-        >
-          <span className="relative flex h-3.5 w-3.5 items-center justify-center">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
-          </span>
-          <span className="text-gray-900 dark:text-white font-bold tracking-wide">Available for Work</span>
-        </motion.div>
-
         {/* Hero Card */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 40 }}
@@ -62,6 +48,20 @@ export const Hero = () => {
           {/* Orb glows */}
           <div className="absolute -top-20 left-1/4 w-60 h-60 bg-primary/20 rounded-full blur-[100px] pointer-events-none" />
           <div className="absolute -bottom-20 right-1/4 w-60 h-60 bg-pink-500/15 rounded-full blur-[100px] pointer-events-none" />
+
+          {/* Floating badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 30, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-primary/20 border border-primary/40 shadow-[0_0_20px_rgba(139,92,246,0.25)] backdrop-blur-md mb-8"
+          >
+            <span className="relative flex h-3.5 w-3.5 items-center justify-center">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+            </span>
+            <span className="text-gray-900 dark:text-white font-bold tracking-wide">Available for Work</span>
+          </motion.div>
 
           {/* Greeting */}
           <motion.p
