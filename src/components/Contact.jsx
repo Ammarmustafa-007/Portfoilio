@@ -102,7 +102,7 @@ export const Contact = () => {
             Get In <span className="gradient-text">Touch</span>
           </h2>
           <div className="section-divider" />
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-foreground text-lg max-w-2xl mx-auto">
             Have a project in mind or want to collaborate? Feel free to reach out. I'm always open to new opportunities.
           </p>
         </motion.div>

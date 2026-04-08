@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowRight } from "lucide-react";
 import { useRef } from "react";
 
 export const Hero = () => {
@@ -43,10 +43,13 @@ export const Hero = () => {
           initial={{ opacity: 0, y: 30, scale: 0.8 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-md mb-8"
+          className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-primary/20 border border-primary/40 shadow-[0_0_20px_rgba(139,92,246,0.25)] backdrop-blur-md mb-8 mt-8"
         >
-          <Sparkles className="w-4 h-4 text-primary" />
-          <span className="text-sm font-medium text-primary">Available for Work</span>
+          <span className="relative flex h-3.5 w-3.5 items-center justify-center">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+          </span>
+          <span className="text-gray-900 dark:text-white font-bold tracking-wide">Available for Work</span>
         </motion.div>
 
         {/* Hero Card */}
@@ -65,7 +68,7 @@ export const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-lg md:text-xl text-muted-foreground font-medium mb-4"
+            className="text-lg md:text-xl text-foreground font-medium mb-4"
           >
             Hey there 👋 I'm
           </motion.p>
@@ -113,7 +116,7 @@ export const Hero = () => {
             transition={{ delay: 1.5, duration: 1, ease: "easeOut" }}
             className="overflow-hidden mx-auto mb-8"
           >
-            <p className="text-xl md:text-2xl font-display font-light text-muted-foreground whitespace-nowrap">
+            <p className="text-xl md:text-2xl font-display font-light text-foreground whitespace-nowrap">
               Full-Stack Developer · UI/UX Enthusiast · Entrepreneur
             </p>
           </motion.div>
@@ -123,7 +126,7 @@ export const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.8, duration: 1 }}
-            className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-10"
+            className="text-base md:text-lg text-foreground max-w-2xl mx-auto leading-relaxed mb-10"
           >
             I craft modern, responsive web applications with <span className="text-primary font-semibold">React</span>,{" "}
             <span className="text-primary font-semibold">Three.js</span>, and the{" "}
@@ -142,10 +145,10 @@ export const Hero = () => {
               href="#projects"
               whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(139, 92, 246, 0.5)" }}
               whileTap={{ scale: 0.95 }}
-              className="cosmic-button text-lg px-10 py-4 flex items-center gap-2"
+              className="cosmic-button text-lg px-10 py-4 flex items-center gap-2 group"
             >
-              <Sparkles className="w-5 h-5" />
               View My Work
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </motion.a>
             <motion.a
               href="#contact"
@@ -165,7 +168,7 @@ export const Hero = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 3, duration: 1 }}
         style={{ opacity: scrollIndicatorOpacity }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center z-10"
+        className="absolute bottom-8 left-4 md:left-12 flex flex-col items-center z-10"
       >
         <motion.span
           animate={{ opacity: [0.5, 1, 0.5] }}

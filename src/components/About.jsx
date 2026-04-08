@@ -116,7 +116,7 @@ export const About = () => {
                 Passionate Web Developer &<br />Tech Entrepreneur
               </h3>
 
-              <div className="space-y-4 text-muted-foreground text-lg leading-relaxed">
+              <div className="space-y-4 text-foreground text-lg leading-relaxed">
                 <motion.p variants={itemVariants}>
                   I'm a passionate web developer skilled in building responsive and user-friendly web applications using{" "}
                   <span className="text-primary font-semibold">JavaScript, React, Tailwind CSS, and the MERN stack</span>.

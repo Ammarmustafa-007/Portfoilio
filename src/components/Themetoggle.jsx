@@ -24,7 +24,7 @@ const Themetoggle = () => {
       onClick={() => setDarkmode((prev) => !prev)}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9, rotate: 180 }}
-      className="relative p-2.5 rounded-xl bg-card/30 backdrop-blur-md border border-white/10 text-foreground transition-all duration-300 hover:border-primary/30 hover:shadow-[0_0_20px_rgba(139,92,246,0.2)]"
+      className="relative p-2.5 rounded-xl bg-card/60 dark:bg-card/30 backdrop-blur-md border border-border/30 dark:border-white/10 text-foreground transition-all duration-300 hover:border-primary/30 hover:shadow-[0_0_20px_rgba(139,92,246,0.2)]"
       aria-label="Toggle Theme"
     >
       <AnimatePresence mode="wait" initial={false}>

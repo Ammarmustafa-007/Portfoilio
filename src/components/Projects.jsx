@@ -56,7 +56,7 @@ export const Projects = () => {
             Featured <span className="gradient-text">Projects</span>
           </h2>
           <div className="section-divider" />
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-foreground text-lg max-w-2xl mx-auto">
             Here are some of my recent projects. Each was carefully crafted with attention to detail, performance, and user experience.
           </p>
         </motion.div>
@@ -138,7 +138,7 @@ export const Projects = () => {
                 <h3 className="text-xl font-display font-bold mb-2 group-hover:text-primary transition-colors duration-300">
                   {project.title}
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
+                <p className="text-foreground text-sm leading-relaxed">
                   {project.description}
                 </p>
               </div>

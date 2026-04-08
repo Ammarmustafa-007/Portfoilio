@@ -40,7 +40,7 @@ export const Skills = () => {
             My <span className="gradient-text">Skills</span>
           </h2>
           <div className="section-divider" />
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-foreground text-lg max-w-2xl mx-auto">
             Technologies and tools I use to bring ideas to life.
           </p>
         </motion.div>

@@ -1,5 +1,25 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+const TrailDot = ({ mouseX, mouseY, i }) => {
+  const x = useSpring(mouseX, { stiffness: 200 - i * 30, damping: 20 + i * 3, mass: 0.3 + i * 0.1 });
+  const y = useSpring(mouseY, { stiffness: 200 - i * 30, damping: 20 + i * 3, mass: 0.3 + i * 0.1 });
+
+  return (
+    <motion.div
+      className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] hidden md:block"
+      style={{
+        x,
+        y,
+        translateX: "-50%",
+        translateY: "-50%",
+        width: 8 - i * 1,
+        height: 8 - i * 1,
+        background: `radial-gradient(circle, rgba(139, 92, 246, ${0.4 - i * 0.07}), rgba(168, 85, 247, ${0.2 - i * 0.03}))`,
+        filter: `blur(${i * 0.5}px)`,
+      }}
+    />
+  );
+};
 
 export const Cursor = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -13,11 +33,7 @@ export const Cursor = () => {
   const springX = useSpring(mouseX, { stiffness: 300, damping: 25, mass: 0.5 });
   const springY = useSpring(mouseY, { stiffness: 300, damping: 25, mass: 0.5 });
 
-  // Trail positions with increasing lag
-  const trails = Array.from({ length: trailCount }, (_, i) => ({
-    x: useSpring(mouseX, { stiffness: 200 - i * 30, damping: 20 + i * 3, mass: 0.3 + i * 0.1 }),
-    y: useSpring(mouseY, { stiffness: 200 - i * 30, damping: 20 + i * 3, mass: 0.3 + i * 0.1 }),
-  }));
+
 
   useEffect(() => {
     const updateMouse = (e) => {
@@ -57,21 +73,8 @@ export const Cursor = () => {
   return (
     <>
       {/* Trail dots — fading gradient trail */}
-      {trails.map((trail, i) => (
-        <motion.div
-          key={i}
-          className="fixed top-0 left-0 rounded-full pointer-events-none z-[9999] hidden md:block"
-          style={{
-            x: trail.x,
-            y: trail.y,
-            translateX: "-50%",
-            translateY: "-50%",
-            width: 8 - i * 1,
-            height: 8 - i * 1,
-            background: `radial-gradient(circle, rgba(139, 92, 246, ${0.4 - i * 0.07}), rgba(168, 85, 247, ${0.2 - i * 0.03}))`,
-            filter: `blur(${i * 0.5}px)`,
-          }}
-        />
+      {Array.from({ length: trailCount }).map((_, i) => (
+        <TrailDot key={i} mouseX={mouseX} mouseY={mouseY} i={i} />
       ))}
 
       {/* Outer ring — springy follow */}
