@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Themetoggle from "./Themetoggle";
 
 const navitems = [
-  { name: "Home", href: "#hero" },
+  { name: "", href: "#hero" },
   { name: "About", href: "#about" },
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
